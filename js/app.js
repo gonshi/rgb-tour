@@ -596,7 +596,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   ns.showPhotos = function( photos ){
     var i = 0;
     //var photosLength = photos.length;
-    var photosLength = 20;
+    var photosLength = 40;
     var maxColumnNum = 3;
     var columnNum;
     var photoMargin = $(window).width() * 0.025;
