@@ -587,6 +587,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   var photoSrcTmpl = 'https://farm#{farm}.staticflickr.com/#{server}/#{id}_#{secret}_n.jpg'; 
   var $photoContainer = $( '.photoContainer' );
   var $loader = $( '.loader' );
+  var $arrow  = $( '.arrow' );
   var $moreBtn = $( '.moreBtn' );
 
   /*
@@ -631,10 +632,23 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
       loadedCount += 1;
       if ( loadedCount === photosLength ){
-        $photoContainer.css({ height: maxHeight + 100, marginTop: 100 });
+        $photoContainer.css({ height: maxHeight + 200, marginTop: 100 });
         $moreBtn.addClass( 'show' );
         $loader.removeClass( 'show' );
-        window.scrollTo(0, 0);
+        $arrow.show().animate( {
+          opacity: 1
+        } );
+
+        window.scrollTo(0, 1);
+
+        $( window ).on( 'scroll', function(){
+          if ( $( window ).scrollTop() > 100 ){
+            $( window ).off( 'scroll' );
+            $arrow.animate( { opacity: 0 }, function(){
+              $arrow.hide();
+            } );
+          }
+        } );
       }
     };
 
@@ -717,6 +731,9 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
       }).
       attr({ src: 'img/flag/white.jpg' });
 
+    $( '.slot').find( '.stop button' ).
+      removeClass( 'delete' );
+
     $map.empty();
     $countryName.text( '' );
     $countryFlagWiki.text( '' );
@@ -750,6 +767,8 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
     
     // click handler
     clickHandler.addEventListener( 'STOP', function( className ){
+      $( '.slot .' + className ).find( '.stop button' ).
+        addClass( 'delete' );
       slot.stop( className );
     });
 
@@ -772,6 +791,8 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
     getFlickrData.addEventListener( 'PHOTO_LOADED', function( photos ){
       ns.showPhotos( photos );
     });
+
+    // INIT
     getCountryData.exec();
     clickHandler.layer();
     clickHandler.reset();
@@ -779,6 +800,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
     function setNext(){
       ns.nextNum = Math.floor( Math.random() * ns.countryList.length );
+      ns.nextNum = 5;
     }
   });
 
