@@ -464,7 +464,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   var $slot = $('.slot');
   var $flag = $('.flag');
   var $flagImg = $flag.find('img');
-  var $countryName = $('.countryName');
+  var $countryName = $('.countryName .text');
   var $countryFlagWiki = $('.countryFlagWiki .sentence');
 
   /*
@@ -541,7 +541,10 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
     function showCountryName(){
       $countryName.
-        css({ 'line-height': ( winHeight / 2 ) + 'px' }).
+        css( {
+          width: winWidth / 2,
+          height: winHeight / 2
+        } ).
         text( ns.countryList[ ns.nextNum ].name ).
         addClass('show');
     }
