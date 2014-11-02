@@ -522,9 +522,12 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
       var waitTime = 1000;
       var latlng = new global.google.maps.LatLng(ns.countryList[ ns.nextNum ].latlng[0], ns.countryList[ ns.nextNum ].latlng[1]);
       var mapOptions = {
+        overviewMapControl: false,
         center: latlng,
         zoom: 3,
-        mapTypeId: global.google.maps.MapTypeId.ROADMAP
+        mapTypeId: global.google.maps.MapTypeId.ROADMAP,
+        streetViewControl : false,
+        mapTypeControl    : false
       };
       var map = new global.google.maps.Map(document.getElementById("map"), mapOptions);
       $('#map').addClass('show');
