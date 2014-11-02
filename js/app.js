@@ -700,7 +700,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   'use strict';
   ns = ns || {};
   var $photoContainer = $( '.photoContainer' );
-  var $countryName = $( '.countryName' );
+  var $countryName = $( '.countryName .text' );
   var $countryFlagWiki = $( '.countryFlagWiki .sentence' );
   var $filter = $( '#filter' );
   var $map = $( '#map' );
