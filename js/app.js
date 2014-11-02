@@ -599,6 +599,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   ].join("");
   var photoSrcTmpl = 'https://farm#{farm}.staticflickr.com/#{server}/#{id}_#{secret}_n.jpg'; 
   var $photoContainer = $( '.photoContainer' );
+  var $photoTitle = $( '.photoTitle' );
   var $loader = $( '.loader' );
   var $arrow  = $( '.arrow' );
   var $moreBtn = $( '.moreBtn' );
@@ -646,7 +647,8 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
       loadedCount += 1;
       if ( loadedCount === photosLength ){
-        $photoContainer.css({ height: maxHeight + 200, marginTop: 100 });
+        $photoContainer.css({ height: maxHeight + 200 });
+        $photoTitle.text( ns.countryList[ ns.nextNum ].name + 'の風景' );
         $loader.removeClass( 'show' );
         $arrow.show();
         $footer.addClass( 'show' );
@@ -654,7 +656,6 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
         if( ns.countryList.length > 1 ){
           $moreBtn.addClass( 'show' );
         }
-
         window.scrollTo(0, 1);
 
         $( window ).on( 'scroll', function(){
