@@ -262,7 +262,9 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
     function layerClick(i){
       layers[i].on('click', function(){
-        that.fireEvent('STOP', that, $(this).attr('class') );
+        if( !$(this).hasClass('selected') ){
+          that.fireEvent('STOP', that, $(this).attr('class') );
+        }
       });
     }
   };
@@ -592,6 +594,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   var $loader = $( '.loader' );
   var $arrow  = $( '.arrow' );
   var $moreBtn = $( '.moreBtn' );
+  var $footer  = $( '#footer' );
 
   /*
    * @param {Object}photos
@@ -636,20 +639,20 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
       loadedCount += 1;
       if ( loadedCount === photosLength ){
         $photoContainer.css({ height: maxHeight + 200, marginTop: 100 });
-        $moreBtn.addClass( 'show' );
         $loader.removeClass( 'show' );
-        $arrow.show().animate( {
-          opacity: 1
-        } );
+        $arrow.show();
+        $footer.addClass( 'show' );
+
+        if( ns.countryList.length > 1 ){
+          $moreBtn.addClass( 'show' );
+        }
 
         window.scrollTo(0, 1);
 
         $( window ).on( 'scroll', function(){
           if ( $( window ).scrollTop() > 100 ){
             $( window ).off( 'scroll' );
-            $arrow.animate( { opacity: 0 }, function(){
-              $arrow.hide();
-            } );
+            $arrow.hide();
           }
         } );
       }
@@ -709,6 +712,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   var $flagImg = $( '.flag img' );
   var $moreBtn = $( '.moreBtn' );
   var $layers = $( '.firstLayer, .secondLayer, .thirdLayer' );
+  var $footer = $( '#footer' );
 
   ns.reset = function(){
     $flag.attr({ src: 'img/flag/white.jpg' });
@@ -742,6 +746,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
     $countryFlagWiki.text( '' );
     $photoContainer.empty().css({ height: 0, marginTop: 0 });
     $moreBtn.removeClass( 'show' );
+    $footer.removeClass( 'show' );
     $filter.removeClass( 'hide' );
     $layers.removeClass( 'selected' );
     window.scrollTo(0, 0);
@@ -803,7 +808,6 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
     function setNext(){
       ns.nextNum = Math.floor( Math.random() * ns.countryList.length );
-      ns.nextNum = 5;
     }
   });
 
