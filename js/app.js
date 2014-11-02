@@ -530,7 +530,9 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
         scaleControl: false,
         overviewMapControl: false,
         streetViewControl : false,
-        mapTypeControl    : false
+        mapTypeControl    : false,
+        draggable         : false,
+        disableDefaultUI  : true,
       };
       var map = new global.google.maps.Map(document.getElementById("map"), mapOptions);
       $('#map').addClass('show');
