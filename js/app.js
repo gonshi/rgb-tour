@@ -648,7 +648,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
       loadedCount += 1;
       if ( loadedCount === photosLength ){
         $photoContainer.css({ height: maxHeight + 200 });
-        $photoTitle.text( ns.countryList[ ns.nextNum ].name + 'の風景' );
+        $photoTitle.text( ns.countryList[ ns.nextNum ].name + 'の風景' ).show();
         $loader.removeClass( 'show' );
         $arrow.show();
         $footer.addClass( 'show' );
@@ -755,7 +755,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
     $countryName.text( '' );
     $countryFlagWiki.text( '' );
     $photoContainer.empty().css({ height: 0, marginTop: 0 });
-    $photoTitle.text( '' );
+    $photoTitle.text( '' ).hide();
     $moreBtn.removeClass( 'show' );
     $footer.removeClass( 'show' );
     $filter.removeClass( 'hide' );
