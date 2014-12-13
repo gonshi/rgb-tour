@@ -183,7 +183,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
   var originalConstructor;
   var instance;
-  var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=6c91ca1e147aafc84b8f0047781440eb&sort=interestingness-desc&place_id=#{place_id}&format=json';
+  var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=6c91ca1e147aafc84b8f0047781440eb&is_commons=true&sort=interestingness-desc&place_id=#{place_id}&format=json';
 
 
 
