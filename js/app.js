@@ -183,9 +183,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
 
   var originalConstructor;
   var instance;
-  var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=6c91ca1e147aafc84b8f0047781440eb&is_commons=true&sort=interestingness-desc&place_id=#{place_id}&format=json';
-
-
+  var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=6c91ca1e147aafc84b8f0047781440eb&sort=interestingness-desc&place_id=#{place_id}&format=json&licence=1,2,3,4,5,6';
 
   /*
   *  @param {string} id
@@ -593,9 +591,16 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
   'use strict';
   ns = ns || {};
   var photoTmpl = [ 
-    '<p class="photo">',
-      '<img src="${photoSrc}" alt="写真">',
-    '</p>'
+    '<div class="photo">',
+      '<p>',
+        '<img src="${photoSrc}" alt="写真">',
+      '</p>',
+      '<p class="photo_copyright">',
+        '<a href="https://www.flickr.com/photos/${copyright}" target="_blank">',
+          '&copy;${copyright}',
+        '</a>',
+      '</p>',
+    '</div>'
   ].join("");
   var photoSrcTmpl = 'https://farm#{farm}.staticflickr.com/#{server}/#{id}_#{secret}_n.jpg'; 
   var $photoContainer = $( '.photoContainer' );
@@ -676,7 +681,7 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
         replace( '#{farm}', photos[ i ].farm ). 
         replace( '#{server}', photos[ i ].server ). 
         replace( '#{id}', photos[ i ].id ). 
-        replace( '#{secret}', photos[ i ].secret ); 
+        replace( '#{secret}', photos[ i ].secret );
     };
 
     $loader.addClass( 'show' );
@@ -697,7 +702,8 @@ gdata.io.handleScriptLoaded.prototype.constructor = originalConstructor;
       }
       ////////////////////////////
 
-      photoDOM = photoTmpl.replace( '${photoSrc}', newImg[ i ].src );
+      photoDOM = photoTmpl.replace( '${photoSrc}', newImg[ i ].src ).
+                           replace( /\${copyright}/g, photos[ i ].owner );
 
       $( photoDOM ).
         css({ left: left, width: photoWidth }).
